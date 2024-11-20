@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "Admin"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "Editor"
+    },
+    {
+      "id": "3",
+      "name": "Michael Brown",
+      "email": "michael@example.com",
+      "role": "Subscriber"
+    },
+    {
+      "id": "4",
+      "name": "Emily Johnson",
+      "email": "emily@example.com",
+      "role": "Admin"
+    },
+    {
+      "id": "5",
+      "name": "David White",
+      "email": "david@example.com",
+      "role": "Editor"
+    },
+    {
+      "id": "6",
+      "name": "Sophia Lee",
+      "email": "sophia@example.com",
+      "role": "Subscriber"
+    },
+    {
+      "id": "7",
+      "name": "James Harris",
+      "email": "james@example.com",
+      "role": "Admin"
+    },
+    {
+      "id": "8",
+      "name": "Olivia Clark",
+      "email": "olivia@example.com",
+      "role": "Editor"
+    },
+    {
+      "id": "9",
+      "name": "William Lewis",
+      "email": "william@example.com",
+      "role": "Subscriber"
+    }
+  ]
+}
