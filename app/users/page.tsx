@@ -1,12 +1,24 @@
 import React from "react";
-import { fetcher } from "@/utils/fetcher";
-import { User } from "./interfaces";
 import UsersList from "./components/UsersList";
+import Search from "./components/Search";
 
 export const revalidate = 3600;
 
-export default async function Users() {
-  const users: User[] = await fetcher("/users");
+type Props = {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+};
 
-  return <UsersList users={users} />;
+export default async function Users(props: Props) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query ?? "";
+
+  return (
+    <>
+      <Search />
+      <UsersList query={query} />
+    </>
+  );
 }

@@ -1,46 +1,40 @@
 import React from "react";
-import Link from "next/link";
 import { User } from "../interfaces";
+import UserCard from "./UserCard";
+import { fetcher } from "@/utils/fetcher";
 
 type Props = {
-  users: User[];
+  query: string;
 };
 
-const UsersList = (props: Props) => {
-  const { users } = props;
+const UsersList = async (props: Props) => {
+  const { query } = props;
+  const allUsers: User[] = await fetcher(`/users`);
+
+  // json-server does not return the user until we pass the FULL name
+  const filteredUsers = allUsers.filter((user) =>
+    user.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  if (!filteredUsers.length)
+    return (
+      <h1 className="text-4xl font-extrabold mb-6 text-gray-900 dark:text-gray-100 text-center">
+        No Users
+      </h1>
+    );
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">User List</h1>
-      <div className="overflow-x-auto shadow-md rounded-lg">
-        <table className="min-w-full table-auto text-left">
-          <thead className="">
-            <tr>
-              <th className="py-2 px-4 border-b">ID</th>
-              <th className="py-2 px-4 border-b">Name</th>
-              <th className="py-2 px-4 border-b">Email</th>
-              <th className="py-2 px-4 border-b">Role</th>
-              <th className="py-2 px-4 border-b"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users?.map((user) => (
-              <tr key={user.id} className="border-b">
-                <td className="py-2 px-4">{user.id}</td>
-                <td className="py-2 px-4">{user.name}</td>
-                <td className="py-2 px-4">{user.email}</td>
-                <td className="py-2 px-4">{user.role}</td>
-                <td className="py-2 px-4">
-                  <Link
-                    href={`/users/${user.id}`}
-                    className="text-blue-500 hover:underline"
-                  >
-                    Open
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="container mx-auto p-6">
+      <h1 className="text-4xl font-extrabold mb-6 text-gray-900 dark:text-gray-100 text-center">
+        User List
+      </h1>
+      <p className="text-lg mb-8 text-gray-500 dark:text-gray-400 text-center">
+        Manage all users in the system with ease.
+      </p>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {filteredUsers?.map((user) => (
+          <UserCard key={user.id} user={user} />
+        ))}
       </div>
     </div>
   );
